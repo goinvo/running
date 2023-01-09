@@ -5,7 +5,8 @@ import cx from "classnames";
 import styles from "./GoogleDocFormatter.module.scss";
 import Image from "next/image";
 
-// A very crude interpretation of: https://developers.google.com/docs/api/concepts/structure
+// TODO: reimplement this as a proper parser
+// This is currently a very crude interpretation of: https://developers.google.com/docs/api/concepts/structure
 
 const LineBreakManager = ({ element }) => {
   // given a text string, replace all the /n with <br /> and return a jsx element
@@ -58,7 +59,7 @@ const ParagraphParser = ({ data, inlineObjects }) => {
             <Link href={embeddedObject.imageProperties.contentUri}>
               <Image
                 className={styles.embeddedImageSrc}
-                alt={"Refresh to see image"}
+                alt={""}
                 src={embeddedObject.imageProperties.contentUri}
                 height={embeddedObject.size.height.magnitude}
                 width={embeddedObject.size.width.magnitude}
