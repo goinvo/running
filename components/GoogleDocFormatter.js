@@ -131,8 +131,20 @@ const GoogleDocFormatter = ({ rawData }) => {
       );
     } else {
       const paragraphStyle = paragraph?.paragraphStyle?.namedStyleType;
-
-      if (paragraphStyle?.includes("HEADING")) {
+      console.log(paragraphStyle);
+      if (paragraphStyle?.includes("TITLE")) {
+        const headingLevel = paragraphStyle.split("_")[1];
+        elementList.push(
+          React.createElement(
+            `div`,
+            { className: styles.title },
+            <ParagraphParser
+              inlineObjects={inlineObjects}
+              data={paragraph.elements}
+            />
+          )
+        );
+      } else if (paragraphStyle?.includes("HEADING")) {
         const headingLevel = paragraphStyle.split("_")[1];
         elementList.push(
           React.createElement(
