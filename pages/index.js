@@ -1,11 +1,35 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
+import { google } from "googleapis";
+
+import GoogleDocFormatter from "../components/GoogleDocFormatter";
+
 import styles from "../styles/Home.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
+export async function getStaticProps() {
+  const documentId = "1Lz2TtV29MerXud1G-nHLgEVUVFt3_GQvaSLJyOPwRsY";
+  const client = new google.auth.JWT({
+    email: process.env.CLIENT_EMAIL,
+    scopes: ["https://www.googleapis.com/auth/documents"],
+    key: process.env.PRIVATE_KEY,
+  });
 
-export default function Home() {
+  await client.authorize();
+
+  const gsapi = google.docs({ version: "v1", auth: client });
+  const opt = {
+    documentId,
+  };
+
+  let data = await gsapi.documents.get(opt);
+  return {
+    props: {
+      data: data.data,
+    },
+    revalidate: 5,
+  };
+}
+
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -15,9 +39,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        Hello!
-        <br />
-        <strong>running.goinvo.com</strong> lives here!
+        <GoogleDocFormatter rawData={data} />
       </main>
     </>
   );
