@@ -1,0 +1,58 @@
+.googleParser {
+  a {
+    color: var(--link);
+  }
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.embeddedImage {
+  text-align: center;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  img.embeddedImageSrc {
+    border: 3px solid var(--primary) !important;
+    border-radius: 10px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+}
+
+.bold {
+  font-weight: bold;
+  color: var(--off-white);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.parsedTable {
+  font-weight: 500;
+  width: auto !important;
+  border-top: 2px solid var(--lauren-gray);
+
+  tr:first-child .bold {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .paragraph:last-child {
+    margin-bottom: 0;
+  }
+}
