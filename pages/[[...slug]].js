@@ -14,8 +14,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const file = params.slug[0];
-  const fileName = file.split("-").join(" ");
+  const file = params.slug?.[0];
+  const fileName = file?.split("-").join(" ") ?? "home";
 
   const homeDocumentId = "1Lz2TtV29MerXud1G-nHLgEVUVFt3_GQvaSLJyOPwRsY";
 
@@ -37,17 +37,25 @@ export async function getStaticProps({ params }) {
     q: `'${folderId}' in parents and trashed = false`,
   };
   let data2 = await gsapi2.files.list(opt2);
-  const fileList = data2.data.files?.sort((a, b) => {
-    if (a.name && b.name) {
-      if (a?.name < b?.name) return -1;
-      if (a?.name > b?.name) return 1;
-    }
-    return 0;
-  });
+  const fileList = data2.data.files
+    ?.sort((a, b) => {
+      if (a.name && b.name) {
+        if (a?.name < b?.name) return -1;
+        if (a?.name > b?.name) return 1;
+      }
+      return 0;
+    })
+    .filter((item) => !item.mimeType.includes("folder"));
+  console.log(data2.data.files);
 
   const documentId =
-    fileList.find((item) => item.name.toLowerCase() === fileName.toLowerCase())
-      ?.id ?? homeDocumentId;
+    fileList.find(
+      (item) =>
+        item.name
+          .toLowerCase()
+          .replace(/[0-9].([a-z].)? /, "")
+          .trim() === fileName.toLowerCase()
+    )?.id ?? homeDocumentId;
 
   // fetch the specific file
   const gsapi = google.docs({ version: "v1", auth: client });
