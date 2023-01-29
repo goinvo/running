@@ -1,5 +1,5 @@
 import GDPEInlineObjectElement from "../paragraph/GDPEInlineObjectElement";
-import GDPETextRun from "../paragraph/GDPETextrun";
+import GDPETextRun from "../paragraph/GDPETextRun";
 
 const GoogleDocParagraph = ({ paragraphs, rawData }) => {
   // Render each paragraph element. Paragraph elements can contain:

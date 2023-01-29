@@ -11,17 +11,15 @@ export const Navigation = ({ menuData }) => {
     <div className={styles.navigation}>
       {menuData &&
         menuData?.map((item) => {
-          console.log(item);
           const fullName = item.name;
           const parsedName = item.name.replace(/[0-9].([a-z].)? /, "").trim();
 
-          console.log(fullName);
           const url =
             parsedName.toLowerCase() === "home" ||
             parsedName.toLowerCase() === "index"
               ? "/"
               : `/${parsedName.split(" ").join("-").toLowerCase()}`;
-          console.log(asPath);
+
           return (
             <div
               key={item.id}

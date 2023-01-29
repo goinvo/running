@@ -46,7 +46,6 @@ export async function getStaticProps({ params }) {
       return 0;
     })
     .filter((item) => !item.mimeType.includes("folder"));
-  console.log(data2.data.files);
 
   const documentId =
     fileList.find(

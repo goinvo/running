@@ -11,8 +11,6 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
     inlineObjects[objectId].inlineObjectProperties.embeddedObject;
   const link = paragraphElement.inlineObjectElement.textStyle.link;
 
-  console.log(JSON.stringify(rawData));
-
   const imageElement = (
     <Image
       alt={""}
