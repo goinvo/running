@@ -10,7 +10,7 @@ import styles from "../GoogleDocFormatter.module.scss";
 const LineBreakManager = ({ element }) => {
   // given a text string, replace all the /n with <br /> and return a jsx element
   if (element === undefined) {
-    return <>test</>;
+    return <></>;
   }
 
   const textArray = element.split("\v");
@@ -20,12 +20,12 @@ const LineBreakManager = ({ element }) => {
     }
     if (key !== textArray.length - 1)
       return (
-        <React.Fragment key={key}>
+        <span key={key}>
           {text}
           <br />
-        </React.Fragment>
+        </span>
       );
-    return <>{text}</>;
+    return <span key={key}>{text}</span>;
   });
 };
 
@@ -54,7 +54,7 @@ const TextRunParser = ({ data }) => {
   );
 };
 
-const GDPETextRun = ({ paragraphElement, rawData }) => {
+const GDPETextRun = ({ paragraphElement }) => {
   return <TextRunParser data={paragraphElement.textRun} />;
 };
 

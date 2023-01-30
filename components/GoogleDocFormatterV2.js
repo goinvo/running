@@ -66,7 +66,7 @@ const GoogleDocFormatterV2 = ({ rawData }) => {
     );
   }
 
-  return <div>{structuralElements}</div>;
+  return <>{structuralElements}</>;
 };
 
 export default GoogleDocFormatterV2;

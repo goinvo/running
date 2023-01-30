@@ -1,6 +1,8 @@
 import GDPEInlineObjectElement from "../paragraph/GDPEInlineObjectElement";
 import GDPETextRun from "../paragraph/GDPETextRun";
 
+import React from "react";
+
 const GoogleDocParagraph = ({ paragraphs, rawData }) => {
   // Render each paragraph element. Paragraph elements can contain:
   // ParagraphStyle (stylings), Bullet (is part of a list), and ParagraphElement (actual content)
@@ -21,6 +23,34 @@ const GoogleDocParagraph = ({ paragraphs, rawData }) => {
             />
           );
         }
+
+        const paragraphStyle = paragraphs.paragraphStyle?.namedStyleType;
+
+        if (paragraphStyle?.includes("TITLE")) {
+          return (
+            <span key={key}>
+              {React.createElement(
+                `div`,
+                { className: styles.title },
+                <GDPETextRun paragraphElement={item} rawData={rawData} />
+              )}
+            </span>
+          );
+        }
+
+        if (paragraphStyle?.includes("HEADING")) {
+          const headingLevel = paragraphStyle.split("_")[1];
+          return (
+            <span key={key}>
+              {React.createElement(
+                `h${headingLevel}`,
+                {},
+                <GDPETextRun paragraphElement={item} rawData={rawData} />
+              )}
+            </span>
+          );
+        }
+
         if (item.textRun) {
           return (
             <GDPETextRun key={key} paragraphElement={item} rawData={rawData} />
