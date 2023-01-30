@@ -1,7 +1,9 @@
+import React from "react";
+
 import GDPEInlineObjectElement from "../paragraph/GDPEInlineObjectElement";
 import GDPETextRun from "../paragraph/GDPETextRun";
 
-import React from "react";
+import styles from "../GoogleDocFormatter.module.scss";
 
 const GoogleDocParagraph = ({ paragraphs, rawData }) => {
   // Render each paragraph element. Paragraph elements can contain:
