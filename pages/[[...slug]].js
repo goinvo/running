@@ -17,8 +17,6 @@ export async function getStaticProps({ params }) {
   const file = params.slug?.[0];
   const fileName = file?.split("-").join(" ") ?? "home";
 
-  const homeDocumentId = "1Lz2TtV29MerXud1G-nHLgEVUVFt3_GQvaSLJyOPwRsY";
-
   const client = new google.auth.JWT({
     email: process.env.CLIENT_EMAIL,
     scopes: [
@@ -46,7 +44,8 @@ export async function getStaticProps({ params }) {
       return 0;
     })
     .filter((item) => !item.mimeType.includes("folder"));
-  console.log(data2.data.files);
+
+  const homeDocumentId = fileList[0].id;
 
   const documentId =
     fileList.find(
