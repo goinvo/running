@@ -1,19 +1,64 @@
 .navigation {
-  padding: 50px 50px 0;
+  padding: 10px;
+  background-color: var(--theme-main);
+  width: calc(var(--navbar-width) - 40px);
+  position: fixed;
+  border-radius: 20px;
+  top: 20px;
+  left: 20px;
+  bottom: 20px;
+
+  h1 {
+    opacity: 0.2;
+    margin: 0 0 0 6px;
+    font-size: 36px;
+    line-height: 36px;
+    margin-top: 10px;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 16px;
+    margin: 0;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    font-weight: 900;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
 
   a {
-    color: rgb(23, 86, 182);
+    display: block;
+    padding: 4px 10px 5px;
+    border-radius: 5px;
     text-decoration: underline;
+    margin-bottom: 3px;
+    font-size: 17px;
+    text-decoration: none;
+    color: black;
+    opacity: 0.9;
+  }
+
+  :not(.active) a:hover {
+    background-color: var(--theme-main-dark);
   }
 }
 
 .subHeading {
-  margin-left: 20px;
+  a {
+    padding-left: 10px;
+    font-size: 15px;
+
+    &:before {
+      content: "• ";
+      margin-right: 5px;
+    }
+  }
 }
 
 .active {
   a {
-    color: gray;
-    text-decoration: none;
+    color: var(--theme-accent);
+    background-color: white;
   }
 }

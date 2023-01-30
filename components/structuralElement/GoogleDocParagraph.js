@@ -46,7 +46,7 @@ const GoogleDocParagraph = ({ paragraphs, rawData }) => {
             <span key={key}>
               {React.createElement(
                 `h${headingLevel}`,
-                {},
+                { className: styles[`heading${headingLevel}`] },
                 <GDPETextRun paragraphElement={item} rawData={rawData} />
               )}
             </span>
