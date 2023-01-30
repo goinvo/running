@@ -4,9 +4,11 @@
   --max-width: 1100px;
   --link: #0070f3;
 
+  --theme-accent: #c9461d;
   --theme-main: rgb(250, 241, 230);
+  --theme-main-dark: rgb(232, 219, 204);
 
-  --navbar-width: 250px;
+  --navbar-width: 270px;
 }
 
 html,

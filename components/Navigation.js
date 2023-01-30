@@ -9,6 +9,8 @@ export const Navigation = ({ menuData }) => {
 
   return (
     <div className={styles.navigation}>
+      <h1>GoInvo</h1>
+      <h2>Playbook</h2>
       {menuData &&
         menuData?.map((item) => {
           const fullName = item.name;
