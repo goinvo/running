@@ -15,7 +15,7 @@ const GoogleDocParagraph = ({ paragraphs, rawData }) => {
         textAlign: paragraphs.paragraphStyle?.alignment,
       }}
     >
-      {paragraphs.elements.map((item, key) => {
+      {paragraphs?.elements?.map((item, key) => {
         if (item.inlineObjectElement) {
           return (
             <GDPEInlineObjectElement
