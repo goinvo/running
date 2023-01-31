@@ -131,9 +131,7 @@ const GoogleDocFormatterV1 = ({ rawData }) => {
       );
     } else {
       const paragraphStyle = paragraph?.paragraphStyle?.namedStyleType;
-      console.log(paragraphStyle);
       if (paragraphStyle?.includes("TITLE")) {
-        const headingLevel = paragraphStyle.split("_")[1];
         elementList.push(
           React.createElement(
             `div`,

@@ -2,5 +2,6 @@
   text-align: center;
   padding: 50px;
   text-align: left;
+  max-width: 960px;
   margin-left: var(--navbar-width);
 }

@@ -84,7 +84,7 @@ export default function Home({ data, menuData }) {
       </Head>
 
       <Navigation menuData={menuData} />
-      <main className={styles.main}>
+      <main id="mainContainer" className={styles.main}>
         <GoogleDocFormatter rawData={data} />
       </main>
     </>
