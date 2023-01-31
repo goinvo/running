@@ -48,7 +48,7 @@ const GoogleDocFormatter = ({ rawData }) => {
         />
       );
     } else if (table) {
-      return <GoogleDocTable key={key} table={table} />;
+      return <GoogleDocTable key={key} table={table} rawData={rawData} />;
     } else if (tableOfContents) {
       return (
         <GoogleDocTableOfContents key={key} tableOfContents={tableOfContents} />

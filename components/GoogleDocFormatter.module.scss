@@ -56,18 +56,12 @@
 }
 
 .parsedTable {
-  font-weight: 500;
-  width: auto !important;
-  border-top: 2px solid var(--lauren-gray);
+  border-collapse: collapse;
+  width: 100%;
 
-  tr:first-child .bold {
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-
-  .paragraph:last-child {
-    margin-bottom: 0;
+  td {
+    padding: 4px 10px;
+    border: 1px solid var(--gray2);
+    vertical-align: top;
   }
 }
