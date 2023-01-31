@@ -6,6 +6,8 @@ import GoogleDocTable from "./structuralElement/GoogleDocTable";
 import GoogleDocTableOfContents from "./structuralElement/GoogleDocTableOfContents";
 import ParsedList from "./structuralElement/ParsedList";
 
+import styles from "./GoogleDocFormatter.module.scss";
+
 const GoogleDocFormatter = ({ rawData }) => {
   const bodyContent = rawData?.body?.content;
   // One of four types of structural element:
@@ -66,7 +68,7 @@ const GoogleDocFormatter = ({ rawData }) => {
     );
   }
 
-  return <>{structuralElements}</>;
+  return <span className={styles.googleParser}>{structuralElements}</span>;
 };
 
 export default GoogleDocFormatter;
