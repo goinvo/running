@@ -9,6 +9,20 @@ const GoogleDocParagraph = ({ paragraphs, rawData }) => {
   // Render each paragraph element. Paragraph elements can contain:
   // ParagraphStyle (stylings), Bullet (is part of a list), and ParagraphElement (actual content)
 
+  // Condense any possible links into one object
+  const elements = paragraphs?.elements;
+  for (let i = 0; i < elements?.length; i++) {
+    if (elements[i].textRun?.content === "[") {
+      if (elements[i + 2].textRun?.content.trim() === "]") {
+        elements[i].textRun.content = "";
+        elements[i + 2].textRun.content = "";
+        elements[i + 1].textRun.content = `[${
+          elements[i + 1].textRun.content
+        }]`;
+      }
+    }
+  }
+
   return (
     <div
       style={{

@@ -47,7 +47,7 @@
   color: var(--off-white);
 }
 
-.underline {
+.underline:has(:not(a.button)) {
   text-decoration: underline;
 }
 
@@ -63,5 +63,19 @@
     padding: 4px 10px;
     border: 1px solid var(--gray2);
     vertical-align: top;
+  }
+}
+
+a.button {
+  border-radius: 20px;
+  background-color: var(--theme-accent);
+  color: var(--gray1);
+  text-decoration: none !important;
+  padding: 7px 15px;
+  transition: 0.1s opacity;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
   }
 }

@@ -18,8 +18,6 @@ const GoogleDocTable = ({ table, rawData }) => {
     return (width / totalWidth) * 100;
   });
 
-  console.log(cellWidths);
-
   const tableData = table.tableRows.map((tableRow, row) => {
     return (
       <tr key={"row" + row}>
