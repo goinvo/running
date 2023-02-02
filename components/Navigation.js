@@ -1,23 +1,47 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
 
 export const Navigation = ({ menuData }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { asPath } = useRouter();
 
   return (
     <>
-      <div className={styles.mobileNavigationBar}>
+      <div
+        className={cx(styles.mobileNavigationBar, {
+          [styles.open]: isMenuOpen,
+        })}
+      >
         <span className={styles.mobileNavigationBarTitle}>GoInvo</span>
         <span className={styles.mobileNavigationBarSubtitle}>Playbook</span>
+        <div
+          className={cx(styles.hitArea, {
+            [styles.open]: isMenuOpen,
+          })}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+          }}
+        >
+          <span className={styles.hotDog1}></span>
+          <span className={styles.hotDog2}></span>
+        </div>
       </div>
-      <div className={styles.navigation}>
-        <Link href="/">
-          <h1>GoInvo</h1>
-          <h2>Playbook</h2>
-        </Link>
+      <div
+        className={cx(styles.navigation, {
+          [styles.open]: isMenuOpen,
+        })}
+      >
+        <div className={styles.header}>
+          <Link href="/">
+            <h1>GoInvo</h1>
+            <h2>Playbook</h2>
+          </Link>
+        </div>
         <div className={styles.menuContent}>
           {menuData &&
             menuData?.map((item) => {
@@ -39,6 +63,9 @@ export const Navigation = ({ menuData }) => {
                     [styles.subHeading]: fullName.match(/[0-9].([a-z].) /),
                     [styles.active]: asPath === url,
                   })}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
                 >
                   <Link href={url}>{parsedName}</Link>
                 </div>
