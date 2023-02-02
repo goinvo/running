@@ -5,3 +5,10 @@
   max-width: 960px;
   margin-left: var(--navbar-width);
 }
+
+@media screen and (max-width: 800px) {
+  .main {
+    padding: 70px var(--mobile-padding) var(--mobile-padding);
+    margin-left: 0;
+  }
+}

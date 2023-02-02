@@ -8,36 +8,44 @@ export const Navigation = ({ menuData }) => {
   const { asPath } = useRouter();
 
   return (
-    <div className={styles.navigation}>
-      <Link href="/">
-        <h1>GoInvo</h1>
-        <h2>Playbook</h2>
-      </Link>
-      <div className={styles.menuContent}>
-        {menuData &&
-          menuData?.map((item) => {
-            const fullName = item.name;
-            const parsedName = item.name.replace(/[0-9].([a-z].)? /, "").trim();
-
-            const url =
-              parsedName.toLowerCase() === "home" ||
-              parsedName.toLowerCase() === "index"
-                ? "/"
-                : `/${parsedName.split(" ").join("-").toLowerCase()}`;
-
-            return (
-              <div
-                key={item.id}
-                className={cx({
-                  [styles.subHeading]: fullName.match(/[0-9].([a-z].) /),
-                  [styles.active]: asPath === url,
-                })}
-              >
-                <Link href={url}>{parsedName}</Link>
-              </div>
-            );
-          })}
+    <>
+      <div className={styles.mobileNavigationBar}>
+        <span className={styles.mobileNavigationBarTitle}>GoInvo</span>
+        <span className={styles.mobileNavigationBarSubtitle}>Playbook</span>
       </div>
-    </div>
+      <div className={styles.navigation}>
+        <Link href="/">
+          <h1>GoInvo</h1>
+          <h2>Playbook</h2>
+        </Link>
+        <div className={styles.menuContent}>
+          {menuData &&
+            menuData?.map((item) => {
+              const fullName = item.name;
+              const parsedName = item.name
+                .replace(/[0-9].([a-z].)? /, "")
+                .trim();
+
+              const url =
+                parsedName.toLowerCase() === "home" ||
+                parsedName.toLowerCase() === "index"
+                  ? "/"
+                  : `/${parsedName.split(" ").join("-").toLowerCase()}`;
+
+              return (
+                <div
+                  key={item.id}
+                  className={cx({
+                    [styles.subHeading]: fullName.match(/[0-9].([a-z].) /),
+                    [styles.active]: asPath === url,
+                  })}
+                >
+                  <Link href={url}>{parsedName}</Link>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </>
   );
 };
