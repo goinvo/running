@@ -77,11 +77,13 @@ export async function getStaticProps({ params }) {
 export default function Home({ data, menuData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // apply the overflow hidden to the body when the menu is open
-  if (isMenuOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
+  if (typeof window !== "undefined") {
+    // apply the overflow hidden to the body when the menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
   }
 
   return (
