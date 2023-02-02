@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
 
-export const Navigation = ({ menuData }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
   const { asPath } = useRouter();
 
   return (

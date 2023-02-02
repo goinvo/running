@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import { google } from "googleapis";
 
 import GoogleDocFormatter from "../components/GoogleDocFormatter";
@@ -74,6 +75,15 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Home({ data, menuData }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // apply the overflow hidden to the body when the menu is open
+  if (isMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
   return (
     <>
       <Head>
@@ -83,7 +93,11 @@ export default function Home({ data, menuData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navigation menuData={menuData} />
+      <Navigation
+        menuData={menuData}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
       <main id="mainContainer" className={styles.main}>
         <GoogleDocFormatter rawData={data} />
       </main>
