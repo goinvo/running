@@ -4,40 +4,72 @@ import { useRouter } from "next/router";
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
 
-export const Navigation = ({ menuData }) => {
+export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
   const { asPath } = useRouter();
 
   return (
-    <div className={styles.navigation}>
-      <Link href="/">
-        <h1>GoInvo</h1>
-        <h2>Playbook</h2>
-      </Link>
-      <div className={styles.menuContent}>
-        {menuData &&
-          menuData?.map((item) => {
-            const fullName = item.name;
-            const parsedName = item.name.replace(/[0-9].([a-z].)? /, "").trim();
-
-            const url =
-              parsedName.toLowerCase() === "home" ||
-              parsedName.toLowerCase() === "index"
-                ? "/"
-                : `/${parsedName.split(" ").join("-").toLowerCase()}`;
-
-            return (
-              <div
-                key={item.id}
-                className={cx({
-                  [styles.subHeading]: fullName.match(/[0-9].([a-z].) /),
-                  [styles.active]: asPath === url,
-                })}
-              >
-                <Link href={url}>{parsedName}</Link>
-              </div>
-            );
+    <>
+      <div
+        className={cx(styles.mobileNavigationBar, {
+          [styles.open]: isMenuOpen,
+        })}
+      >
+        <span className={styles.mobileNavigationBarTitle}>GoInvo</span>
+        <span className={styles.mobileNavigationBarSubtitle}>Playbook</span>
+        <div
+          className={cx(styles.hitArea, {
+            [styles.open]: isMenuOpen,
           })}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+          }}
+        >
+          <span className={styles.hotDog1}></span>
+          <span className={styles.hotDog2}></span>
+        </div>
       </div>
-    </div>
+      <div
+        className={cx(styles.navigation, {
+          [styles.open]: isMenuOpen,
+        })}
+      >
+        <div className={styles.header}>
+          <Link href="/">
+            <h1>GoInvo</h1>
+            <h2>Playbook</h2>
+          </Link>
+        </div>
+        <div className={styles.menuContent}>
+          {menuData &&
+            menuData?.map((item) => {
+              const fullName = item.name;
+              const parsedName = item.name
+                .replace(/[0-9].([a-z].)? /, "")
+                .trim();
+
+              const url =
+                parsedName.toLowerCase() === "home" ||
+                parsedName.toLowerCase() === "index"
+                  ? "/"
+                  : `/${parsedName.split(" ").join("-").toLowerCase()}`;
+
+              return (
+                <div
+                  key={item.id}
+                  className={cx({
+                    [styles.subHeading]: fullName.match(/[0-9].([a-z].) /),
+                    [styles.active]: asPath === url,
+                  })}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <Link href={url}>{parsedName}</Link>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </>
   );
 };
