@@ -25,6 +25,11 @@ const LineBreakManager = ({ element }) => {
           <br />
         </span>
       );
+    // see if text matches 3 dashes or more
+    // if so, render a horizontal rule
+    if (text.match(/_{3,}/)) {
+      return <span key={key} className={styles.horizontalLine} />;
+    }
     return <span key={key}>{text}</span>;
   });
 };

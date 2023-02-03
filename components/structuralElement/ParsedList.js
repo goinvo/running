@@ -2,7 +2,7 @@ import React from "react";
 import GoogleDocParagraph from "./GoogleDocParagraph";
 
 const ParsedList = ({ list, rawData }) => {
-  const listData = rawData.lists;
+  const listData = rawData?.lists;
 
   // Render each paragraph element as a list item
   const listItems = list.map((item, key) => {
@@ -29,7 +29,7 @@ const ParsedList = ({ list, rawData }) => {
 
   // For now, just get level 0 data.
   const listType =
-    listData[list[0].bullet.listId]?.listProperties.nestingLevels[0]
+    listData?.[list[0]?.bullet?.listId]?.listProperties?.nestingLevels[0]
       .glyphType === "DECIMAL"
       ? "ol"
       : "ul";
