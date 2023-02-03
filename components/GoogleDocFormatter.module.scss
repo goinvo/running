@@ -25,6 +25,13 @@
   color: var(--gray4);
 }
 
+.horizontalLine {
+  border: 1px solid var(--gray3);
+  margin: 0;
+  width: 100%;
+  display: block;
+}
+
 .embeddedImage {
   text-align: center;
   display: block;
