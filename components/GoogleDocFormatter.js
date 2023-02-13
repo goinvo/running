@@ -20,6 +20,8 @@ const GoogleDocFormatter = ({ rawData }) => {
 
   const structuralElements = bodyContent?.map((item, key) => {
     const { paragraph, table, tableOfContents, sectionBreak } = item;
+    let listElement = null;
+
     if (paragraph) {
       if (paragraph.bullet) {
         if (
@@ -34,22 +36,36 @@ const GoogleDocFormatter = ({ rawData }) => {
           const list = [...activeList];
           activeList = [paragraph];
           activeBulletStyle = paragraph.bullet.listId;
-          return <ParsedList list={list} rawData={rawData} key={key} />;
+          listElement = (
+            <ParsedList list={list} rawData={rawData} key={key + "list"} />
+          );
         }
       }
-      if (activeList.length > 0) {
+
+      // not a list, but previously there was a list
+      if (listElement === null && activeList.length > 0) {
         const list = [...activeList];
         activeList = [];
-        return <ParsedList key={key} rawData={rawData} list={list} />;
+        listElement = (
+          <ParsedList key={key + "list"} rawData={rawData} list={list} />
+        );
       }
+
       return (
-        <GoogleDocParagraph
-          key={key}
-          paragraphs={paragraph}
-          rawData={rawData}
-        />
+        <>
+          {listElement ? listElement : null}
+          {activeList.length === 0 && (
+            <GoogleDocParagraph
+              key={key}
+              paragraphs={paragraph}
+              rawData={rawData}
+            />
+          )}
+        </>
       );
-    } else if (table) {
+    }
+
+    if (table) {
       return <GoogleDocTable key={key} table={table} rawData={rawData} />;
     } else if (tableOfContents) {
       return (

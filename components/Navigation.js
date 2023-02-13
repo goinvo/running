@@ -35,8 +35,8 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
       >
         <div className={styles.header}>
           <Link href="/">
-            <h1>GoInvo</h1>
-            <h2>Playbook</h2>
+            <h1>Running.GoInvo</h1>
+            <h2>Playbook 3.0</h2>
           </Link>
         </div>
         <div className={styles.menuContent}>

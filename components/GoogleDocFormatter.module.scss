@@ -1,6 +1,8 @@
 .googleParser {
+  font-size: 18px;
+
   a {
-    color: var(--link);
+    color: var(--theme-main);
   }
 }
 
@@ -26,27 +28,11 @@
 }
 
 .horizontalLine {
-  border: 1px solid var(--gray3);
+  border: 1px solid var(--theme-accent);
+  opacity: 0.4;
   margin: 0;
   width: 100%;
   display: block;
-}
-
-.embeddedImage {
-  text-align: center;
-  display: block;
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  img.embeddedImageSrc {
-    border: 3px solid var(--primary) !important;
-    border-radius: 10px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.6;
-  }
 }
 
 .bold {
@@ -73,16 +59,36 @@
   }
 }
 
+.embededImage {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin-right: 20px;
+  line-height: 0;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+  }
+}
+
 a.button {
   border-radius: 20px;
-  background-color: var(--theme-accent);
+  background-color: var(--theme-main);
   color: var(--gray1);
   text-decoration: none !important;
-  padding: 7px 15px;
+  padding: 7px 30px;
   transition: 0.1s opacity;
+  font-size: 16px;
 
   &:hover {
     cursor: pointer;
     opacity: 0.6;
+  }
+}
+
+.list {
+  ul,
+  ol {
+    padding-left: 20px;
   }
 }
