@@ -41,7 +41,7 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
         </div>
         <div className={styles.menuContent}>
           {menuData &&
-            menuData?.map((item) => {
+            menuData?.map((item, key) => {
               const fullName = item.name;
               const parsedName = item.name
                 .replace(/[0-9].([a-z].)? /, "")
@@ -52,6 +52,12 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
                 parsedName.toLowerCase() === "index"
                   ? "/"
                   : `/${parsedName.split(" ").join("-").toLowerCase()}`;
+
+              // Don't show the first menu item because we're assuming that
+              // it's the home page.
+              if (key === 0) {
+                return;
+              }
 
               return (
                 <div
