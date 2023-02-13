@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleDocParagraph from "./GoogleDocParagraph";
+import styles from "../GoogleDocFormatter.module.scss";
 
 const ParsedList = ({ list, rawData }) => {
   const listData = rawData?.lists;
@@ -34,7 +35,11 @@ const ParsedList = ({ list, rawData }) => {
       ? "ol"
       : "ul";
 
-  return <div>{React.createElement(listType, {}, listItems)}</div>;
+  return (
+    <div className={styles.list}>
+      {React.createElement(listType, {}, listItems)}
+    </div>
+  );
 };
 
 export default ParsedList;

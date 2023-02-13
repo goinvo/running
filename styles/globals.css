@@ -5,12 +5,12 @@
   --link: #0070f3;
   --mobile-padding: 20px;
 
-  --theme-accent: #c9461d;
-  --theme-main: rgb(250, 241, 230);
+  --theme-accent: #274D9F;
+  --theme-main: #4166B4;
   --theme-main-semi-transparent: rgba(250, 241, 230, 0.8);
-  --theme-main-dark: rgb(232, 219, 204);
+  --theme-main-dark: #274D9F;
 
-  --navbar-width: 270px;
+  --navbar-width: 290px;
 
   --gray1: #f5f5f5;
   --gray2: #e5e5e5;

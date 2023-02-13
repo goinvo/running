@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import styles from "../GoogleDocFormatter.module.scss";
+
 // Arbitrary Scaling for Images
 const imageScaling = 1.5;
 
@@ -30,12 +32,14 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
   const link = paragraphElement.inlineObjectElement.textStyle.link;
 
   const imageElement = (
-    <Image
-      alt={""}
-      src={embeddedObject.imageProperties.contentUri}
-      height={(embeddedObject.size.height.magnitude / 640) * windowWidth}
-      width={(embeddedObject.size.width.magnitude / 640) * windowWidth}
-    />
+    <span className={styles.embededImage}>
+      <Image
+        alt={""}
+        src={embeddedObject.imageProperties.contentUri}
+        height={(embeddedObject.size.height.magnitude / 640) * windowWidth}
+        width={(embeddedObject.size.width.magnitude / 640) * windowWidth}
+      />
+    </span>
   );
 
   if (link) {
