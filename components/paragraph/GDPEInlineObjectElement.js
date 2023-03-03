@@ -32,7 +32,7 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
   const link = paragraphElement.inlineObjectElement.textStyle.link;
 
   const imageElement = (
-    <span className={styles.embededImage}>
+    <span className={styles.embeddedImage}>
       <Image
         alt={""}
         src={embeddedObject.imageProperties.contentUri}

@@ -7,6 +7,7 @@ import GoogleDocTableOfContents from "./structuralElement/GoogleDocTableOfConten
 import ParsedList from "./structuralElement/ParsedList";
 
 import styles from "./GoogleDocFormatter.module.scss";
+import cx from "classnames";
 
 const GoogleDocFormatter = ({ rawData }) => {
   const bodyContent = rawData?.body?.content;
@@ -84,7 +85,62 @@ const GoogleDocFormatter = ({ rawData }) => {
     );
   }
 
-  return <span className={styles.googleParser}>{structuralElements}</span>;
+  const rebuiltStructuralElements = [];
+  let enterColumn = [];
+  let isInColumn = false;
+  let headerContent = "";
+  for (let i = 0; i < structuralElements?.length; i++) {
+    if (!isInColumn) {
+      rebuiltStructuralElements.push(structuralElements[i]?.props?.children);
+    } else {
+      enterColumn.push(structuralElements[i]?.props?.children);
+    }
+    if (structuralElements[i] !== null) {
+      for (let j = 0; j < structuralElements[i]?.props?.children?.length; j++) {
+        if (structuralElements[i]?.props?.children[j] !== null) {
+          const textContent =
+            structuralElements[i]?.props?.children?.[j]?.props?.paragraphs
+              ?.elements?.[0]?.textRun?.content;
+
+          if (
+            parseInt(textContent?.match(/\[(cols\: )(\d+)\]/)?.[2], 10) >= 2
+          ) {
+            isInColumn = true;
+            headerContent = textContent
+              .toLowerCase()
+              .replace(/\[(cols\: )(\d+)\]/g, "")
+              .replace(/\n/g, "")
+              .trim()
+              .split(" ")
+              .join("-");
+          } else if (
+            structuralElements[i]?.props?.children?.[
+              j
+            ]?.props?.paragraphs?.elements?.[0]?.textRun?.content?.match(
+              /_{3,}/
+            )
+          ) {
+            isInColumn = false;
+            const lastAdded = enterColumn.pop();
+            rebuiltStructuralElements.push(
+              <div
+                className={cx(styles.column, {
+                  [styles[headerContent]]: true,
+                })}
+              >
+                {enterColumn}
+              </div>
+            );
+            rebuiltStructuralElements.push(lastAdded);
+            enterColumn = [];
+          }
+        }
+      }
+    }
+  }
+  return (
+    <span className={styles.googleParser}>{rebuiltStructuralElements}</span>
+  );
 };
 
 export default GoogleDocFormatter;

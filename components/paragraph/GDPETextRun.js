@@ -25,11 +25,23 @@ const LineBreakManager = ({ element }) => {
           <br />
         </span>
       );
+
+    // Text Replacements
+
     // see if text matches 3 dashes or more
     // if so, render a horizontal rule
     if (text.match(/_{3,}/)) {
       return <span key={key} className={styles.horizontalLine} />;
     }
+
+    // see if text matches --> or <--
+    // if so, render an arrow
+    text = text.replace(/-->/g, "→").replace(/<--/g, "←");
+
+    // see if text matches [cols: number]
+    // if so, replace with blank
+    text = text.replace(/\[cols: \d+\]/g, "");
+
     return <span key={key}>{text}</span>;
   });
 };
