@@ -1,0 +1,56 @@
+.background {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s opacity;
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  iframe {
+    width: 80%;
+    height: 80%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    color: var(--gray1);
+    transition: 0.1s opacity;
+    z-index: 101;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .background {
+    iframe {
+      position: fixed;
+      top: 60px;
+      left: 20px;
+
+      width: calc(100% - 40px);
+      height: calc(100% - 90px);
+    }
+  }
+}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import styles from "../GoogleDocFormatter.module.scss";
+import { Lightbox } from "../Lightbox";
 
 // Arbitrary Scaling for Images
 const imageScaling = 1.5;
@@ -32,7 +33,7 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
   const link = paragraphElement.inlineObjectElement.textStyle.link;
 
   const imageElement = (
-    <span className={styles.embededImage}>
+    <span className={styles.embeddedImage}>
       <Image
         alt={""}
         src={embeddedObject.imageProperties.contentUri}
@@ -43,6 +44,11 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
   );
 
   if (link) {
+    // check if link.url contains #lightbox
+    // if it does, then return the imageElement wrapped in a lightbox
+    if (link.url.includes("#lightbox")) {
+      return <Lightbox url={link.url}>{imageElement}</Lightbox>;
+    }
     return <a href={link.url}>{imageElement}</a>;
   }
 

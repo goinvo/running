@@ -56,6 +56,7 @@ const GoogleDocParagraph = ({ paragraphs, rawData }) => {
 
         if (paragraphStyle?.includes("HEADING")) {
           const headingLevel = paragraphStyle.split("_")[1];
+
           return (
             <span key={key}>
               {React.createElement(
