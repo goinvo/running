@@ -51,7 +51,6 @@ export async function getStaticProps({ params }) {
 
   const documentId =
     fileList.find((item) => {
-      console.log(item.name, fileName);
       return standardizePageId(item.name) === standardizePageId(fileName);
     })?.id ?? homeDocumentId;
 
