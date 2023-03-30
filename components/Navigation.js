@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
+import { standardizePageId } from "./utils/format";
 
 export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
   const { asPath } = useRouter();
@@ -43,15 +44,13 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
           {menuData &&
             menuData?.map((item, key) => {
               const fullName = item.name;
-              const parsedName = item.name
-                .replace(/[0-9].([a-z].)? /, "")
-                .trim();
+              const pageTitle = item.name;
 
               const url =
-                parsedName.toLowerCase() === "home" ||
-                parsedName.toLowerCase() === "index"
+                pageTitle.toLowerCase() === "home" ||
+                pageTitle.toLowerCase() === "index"
                   ? "/"
-                  : `/${parsedName.split(" ").join("-").toLowerCase()}`;
+                  : `/${standardizePageId(pageTitle)}`;
 
               // Don't show the first menu item because we're assuming that
               // it's the home page.
@@ -70,7 +69,9 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
                     setIsMenuOpen(false);
                   }}
                 >
-                  <Link href={url}>{parsedName}</Link>
+                  <Link href={url}>
+                    {pageTitle.replace(/[0-9].([a-z].)? /, "")}
+                  </Link>
                 </div>
               );
             })}
