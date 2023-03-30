@@ -6,6 +6,7 @@ import GoogleDocFormatter from "../components/GoogleDocFormatter";
 
 import styles from "../styles/Home.module.css";
 import { Navigation } from "../components/Navigation";
+import { standardizePageId } from "../components/utils/format";
 
 export async function getStaticPaths() {
   return {
@@ -49,13 +50,10 @@ export async function getStaticProps({ params }) {
   const homeDocumentId = fileList[0].id;
 
   const documentId =
-    fileList.find(
-      (item) =>
-        item.name
-          .toLowerCase()
-          .replace(/[0-9].([a-z].)? /, "")
-          .trim() === fileName.toLowerCase()
-    )?.id ?? homeDocumentId;
+    fileList.find((item) => {
+      console.log(item.name, fileName);
+      return standardizePageId(item.name) === standardizePageId(fileName);
+    })?.id ?? homeDocumentId;
 
   // fetch the specific file
   const gsapi = google.docs({ version: "v1", auth: client });
