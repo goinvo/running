@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
-import { standardizePageId } from "./utils/format";
+import { standardizePageId } from "../utils/format";
 
 export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
   const { asPath } = useRouter();
@@ -48,7 +48,7 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
 
               const url =
                 pageTitle.toLowerCase() === "home" ||
-                pageTitle.toLowerCase() === "index"
+                  pageTitle.toLowerCase() === "index"
                   ? "/"
                   : `/${standardizePageId(pageTitle)}`;
 
