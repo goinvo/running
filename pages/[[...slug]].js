@@ -71,7 +71,7 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Home({ data, menuData }) {
+export default function Page({ data, menuData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (typeof window !== "undefined") {
@@ -97,6 +97,7 @@ export default function Home({ data, menuData }) {
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
       />
+      
       <main id="mainContainer" className={styles.main}>
         <GoogleDocFormatter rawData={data} />
       </main>
