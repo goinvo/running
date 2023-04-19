@@ -1,7 +1,7 @@
 
 import { google } from "googleapis";
 
-export const getFileList = async () => {
+export const getFileList = async (allFiles) => {
   const client = new google.auth.JWT({
     email: process.env.CLIENT_EMAIL,
     scopes: [
@@ -28,6 +28,9 @@ export const getFileList = async () => {
       }
       return 0;
     })
-    .filter((item) => !item.mimeType.includes("folder"));
+    .filter((item) => !item.mimeType.includes("folder"))
+    // if allFiles is true, or is defined, always return every file
+    // otherwise, only return the files that do NOT include unlisted
+    .filter((item => allFiles || !item.name.includes('#unlisted')));
   return [fileList, client];
 }

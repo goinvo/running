@@ -35,18 +35,25 @@ export async function getStaticProps({ params }) {
     documentId,
   };
 
+  // fetch contact data info
+  const opt2 = {
+    documentId: "1amHWSkWWTYPS7VeajDpfn66lLa5MSCe8h4aHyxLO-j4"
+  };
+
   let data = await gsapi.documents.get(opt);
+  let contactData = await gsapi.documents.get(opt2);
 
   return {
     props: {
       data: data.data,
+      contactData: contactData.data,
       menuData: fileList,
     },
     revalidate: 5,
   };
 }
 
-export default function Page({ data, menuData }) {
+export default function Page({ data, menuData, contactData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (typeof window !== "undefined") {
@@ -71,6 +78,7 @@ export default function Page({ data, menuData }) {
         menuData={menuData}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        contactData={contactData}
       />
 
       <main id="mainContainer" className={styles.main}>

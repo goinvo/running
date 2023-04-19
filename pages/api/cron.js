@@ -2,7 +2,7 @@ import { standardizePageId } from "../../utils/format";
 import { getFileList } from "../../utils/data";
 
 export default async function handler(req, res) {
-  const [fileList, client] = await getFileList();
+  const [fileList, client] = await getFileList(true);
   const urls = fileList.map((item) => {
     return `https://running.goinvo.com/${standardizePageId(item.name)}`;
   })
