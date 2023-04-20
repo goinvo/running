@@ -9,6 +9,7 @@ export default function Document() {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-9PKCZSQJ5F"
         ></script>
+        <link rel="icon" href="/favicon-32x32.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];

@@ -1,6 +1,6 @@
 import styles from "./GoogleDocFormatter.module.scss";
 
-import { isWrappedInSquareBrackets } from "./utils/format";
+import { isWrappedInSquareBrackets } from "../utils/format";
 
 const MaybeLink = ({ children, link }) => {
   // check to see if the children text is wrapped in square brackets

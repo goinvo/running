@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 
 import styles from "./Navigation.module.scss";
 import cx from "classnames";
-import { standardizePageId } from "./utils/format";
+import { standardizePageId } from "../utils/format";
+import GoogleDocFormatter from "./GoogleDocFormatter";
 
-export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
+export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen, contactData }) => {
   const { asPath } = useRouter();
 
   return (
@@ -48,7 +49,7 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
 
               const url =
                 pageTitle.toLowerCase() === "home" ||
-                pageTitle.toLowerCase() === "index"
+                  pageTitle.toLowerCase() === "index"
                   ? "/"
                   : `/${standardizePageId(pageTitle)}`;
 
@@ -75,6 +76,9 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen }) => {
                 </div>
               );
             })}
+        </div>
+        <div className={styles.feedbackContainer}>
+          <GoogleDocFormatter rawData={contactData} />
         </div>
       </div>
     </>

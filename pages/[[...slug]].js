@@ -6,7 +6,8 @@ import GoogleDocFormatter from "../components/GoogleDocFormatter";
 
 import styles from "../styles/Home.module.css";
 import { Navigation } from "../components/Navigation";
-import { standardizePageId } from "../components/utils/format";
+import { standardizePageId } from "../utils/format";
+import { getFileList } from "../utils/data";
 
 export async function getStaticPaths() {
   return {
@@ -19,33 +20,7 @@ export async function getStaticProps({ params }) {
   const file = params.slug?.[0];
   const fileName = file?.split("-").join(" ") ?? "home";
 
-  const client = new google.auth.JWT({
-    email: process.env.CLIENT_EMAIL,
-    scopes: [
-      "https://www.googleapis.com/auth/documents",
-      "https://www.googleapis.com/auth/drive",
-    ],
-    key: process.env.PRIVATE_KEY,
-  });
-
-  await client.authorize();
-
-  // fetch the entire folder
-  const folderId = "11N3RY-5t73GvWfvXa-qFAvww8vIw1AOG";
-  const gsapi2 = google.drive({ version: "v3", auth: client });
-  const opt2 = {
-    q: `'${folderId}' in parents and trashed = false`,
-  };
-  let data2 = await gsapi2.files.list(opt2);
-  const fileList = data2.data.files
-    ?.sort((a, b) => {
-      if (a.name && b.name) {
-        if (a?.name < b?.name) return -1;
-        if (a?.name > b?.name) return 1;
-      }
-      return 0;
-    })
-    .filter((item) => !item.mimeType.includes("folder"));
+  const [fileList, client] = await getFileList();
 
   const homeDocumentId = fileList[0].id;
 
@@ -60,18 +35,25 @@ export async function getStaticProps({ params }) {
     documentId,
   };
 
+  // fetch contact data info
+  const opt2 = {
+    documentId: "1amHWSkWWTYPS7VeajDpfn66lLa5MSCe8h4aHyxLO-j4"
+  };
+
   let data = await gsapi.documents.get(opt);
+  let contactData = await gsapi.documents.get(opt2);
 
   return {
     props: {
       data: data.data,
+      contactData: contactData.data,
       menuData: fileList,
     },
     revalidate: 5,
   };
 }
 
-export default function Home({ data, menuData }) {
+export default function Page({ data, menuData, contactData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (typeof window !== "undefined") {
@@ -96,7 +78,9 @@ export default function Home({ data, menuData }) {
         menuData={menuData}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        contactData={contactData}
       />
+
       <main id="mainContainer" className={styles.main}>
         <GoogleDocFormatter rawData={data} />
       </main>
