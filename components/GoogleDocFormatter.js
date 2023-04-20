@@ -31,7 +31,11 @@ const GoogleDocFormatter = ({ rawData }) => {
         ) {
           activeList.push(paragraph);
           activeBulletStyle = paragraph.bullet.listId;
-          return null;
+
+          // this is the last item - if we return null, it won't render
+          if (key !== bodyContent.length - 1) {
+            return null;
+          }
         } else {
           // We've reached a new type of list
           const list = [...activeList];
@@ -42,7 +46,6 @@ const GoogleDocFormatter = ({ rawData }) => {
           );
         }
       }
-
       // not a list, but previously there was a list
       if (listElement === null && activeList.length > 0) {
         const list = [...activeList];
@@ -55,13 +58,14 @@ const GoogleDocFormatter = ({ rawData }) => {
       return (
         <>
           {listElement ? listElement : null}
-          {activeList.length === 0 && (
-            <GoogleDocParagraph
-              key={key}
-              paragraphs={paragraph}
-              rawData={rawData}
-            />
-          )}
+          {(activeList.length === 0 &&
+            !(key === bodyContent.length - 1 && paragraph.bullet !== undefined)) && (
+              <GoogleDocParagraph
+                key={key}
+                paragraphs={paragraph}
+                rawData={rawData}
+              />
+            )}
         </>
       );
     }
@@ -138,6 +142,7 @@ const GoogleDocFormatter = ({ rawData }) => {
       }
     }
   }
+
   return (
     <span className={styles.googleParser}>{rebuiltStructuralElements}</span>
   );
