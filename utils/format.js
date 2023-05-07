@@ -11,3 +11,15 @@ export const standardizePageId = (title) => {
     .trim()
     .toLowerCase();
 };
+
+export const formatEmbedUrl = (url) => {
+  // google slides needs to be /embed instead of /pub, so replace it if we see it
+  url = url.replace("/pub", "/embed");
+
+  // figma needs to be under the figma.com/embed route
+  if (url.includes("figma.com")) {
+    url = `https://www.figma.com/embed?embed_host=share&url=${url}`;
+  }
+
+  return url;
+}

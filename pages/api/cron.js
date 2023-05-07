@@ -9,7 +9,9 @@ export default async function handler(req, res) {
   urls.push('https://running.goinvo.com');
   urls.push('https://running.goinvo.com/index');
 
-  for (let i = 0; i < 4; i++) {
+  const CYCLES = 4;
+
+  for (let i = 0; i < CYCLES; i++) {
     setTimeout(async () => {
       for (const url of urls) {
         console.log('visiting ' + url);
@@ -18,5 +20,8 @@ export default async function handler(req, res) {
     }, i * 3000);
   }
 
-  res.status(200).end('Good!');
+  // Forced delay for all cycles to complete
+  setTimeout(() => {
+    res.status(200).end('Good!');
+  }, (CYCLES + 1) * 3000)
 }
