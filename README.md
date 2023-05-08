@@ -30,6 +30,8 @@ If you don't want a document to show up in the Navigation, there are two options
 
 Lightboxes are useful to keep the user on the site while being able to view the pertinent information. Any link can be converted to open in an lightbox iframe. Add `#lightbox` to the end of the link on the Google Document link to trigger the lightbox.
 
+If you'd like the link to be a preview of the lightbox content itself, add `#lightbox-preview` to the end of a link and a mini iframe thumbnail will render. This however takes longer than just loading a simple image, so sparse usage is advised. 
+
 ### Two Columns
 
 We detect if columns are present via a `[cols: 2]` at the end of a `Heading 3` in Google Docs. If so, the immediate following content will be split into a special format which is 2 columns on desktop and 1 slim column on mobile. This is currently used for `Quick Links` and `Guides`, which are typically at the top of each document page.
