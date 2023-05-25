@@ -36,17 +36,34 @@ const GDPEInlineObjectElement = ({ paragraphElement, rawData }) => {
   const link = paragraphElement.inlineObjectElement.textStyle.link;
 
   const imageElement = (
-    <span className={cx({
-      [styles.embeddedImage]: true,
-      [styles.hasLink]: link
-    })}>
-      <Image
-        alt={""}
-        src={embeddedObject.imageProperties.contentUri}
-        height={(embeddedObject.size.height.magnitude / 640) * windowWidth}
-        width={(embeddedObject.size.width.magnitude / 640) * windowWidth}
-      />
-    </span>
+    <>
+      <span className={cx({
+        [styles.embeddedImage]: true,
+        [styles.hasLink]: link,
+        [styles.notColumnContent]: true,
+      })}>
+        <Image
+          alt={""}
+          src={embeddedObject.imageProperties.contentUri}
+          height={(embeddedObject.size.height.magnitude / 640) * windowWidth}
+          width={(embeddedObject.size.width.magnitude / 640) * windowWidth}
+        />
+      </span>
+
+      {/* special resizing case for images if they're in a column */}
+      <span className={cx({
+        [styles.column]: true,
+        [styles.hasLink]: link,
+        [styles.columnContent]: true,
+      })}>
+        <Image
+          alt={""}
+          src={embeddedObject.imageProperties.contentUri}
+          height={(embeddedObject.size.height.magnitude / 640) * windowWidth * 2}
+          width={(embeddedObject.size.width.magnitude / 640) * windowWidth * 2}
+        />
+      </span>
+    </>
   );
 
   if (link) {
