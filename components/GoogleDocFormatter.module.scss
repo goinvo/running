@@ -86,14 +86,6 @@
     }
   }
 
-  .notColumnContent {
-    display: none;
-  }
-  
-  .columnContent {
-    display: block;
-  }
-
   &.quick-links {
     gap: 10px;
   }
@@ -118,13 +110,6 @@
   }
 }
 
-.notColumnContent {
-  display: block;
-}
-
-.columnContent {
-  display: none;
-}
 
 .previewIFrameContainer {
   display: inline-block;
