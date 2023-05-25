@@ -16,8 +16,10 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen, contactData })
           [styles.open]: isMenuOpen,
         })}
       >
-        <span className={styles.mobileNavigationBarTitle}>GoInvo</span>
-        <span className={styles.mobileNavigationBarSubtitle}>Playbook</span>
+        <Link href="/">
+          <span className={styles.mobileNavigationBarTitle}>GoInvo</span>
+          <span className={styles.mobileNavigationBarSubtitle}>Playbook</span>
+        </Link>
         <div
           className={cx(styles.hitArea, {
             [styles.open]: isMenuOpen,
@@ -42,6 +44,16 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen, contactData })
           </Link>
         </div>
         <div className={styles.menuContent}>
+          <div
+            className={styles.hide}
+            onClick={() => {
+              setIsMenuOpen(false);
+            }}
+          >
+            <Link href={"/"}>
+              Home
+            </Link>
+          </div>
           {menuData &&
             menuData?.map((item, key) => {
               const fullName = item.name;
