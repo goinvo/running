@@ -17,11 +17,11 @@ export default async function handler(req, res) {
         console.log('visiting ' + url);
         await fetch(url);
       }
-    }, i * 3000);
+    }, i * 2000);
   }
 
   // Forced delay for all cycles to complete
   setTimeout(() => {
     res.status(200).end('Good!');
-  }, (CYCLES + 1) * 3000)
+  }, (CYCLES + 1) * 6000)
 }
