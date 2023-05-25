@@ -1,6 +1,11 @@
 import { standardizePageId } from "../../utils/format";
 import { getFileList } from "../../utils/data";
 
+// sleep function 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export default async function handler(req, res) {
   const [fileList, client] = await getFileList(true);
   const urls = fileList.map((item) => {
@@ -17,11 +22,11 @@ export default async function handler(req, res) {
         console.log('visiting ' + url);
         await fetch(url);
       }
-    }, i * 2000);
+    }, i * 1500);
   }
 
   // Forced delay for all cycles to complete
-  setTimeout(() => {
-    res.status(200).end('Good!');
-  }, (CYCLES + 1) * 6000)
+  await sleep(30_000);
+
+  res.status(200).end('Good!');
 }
