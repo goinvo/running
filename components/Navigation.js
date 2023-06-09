@@ -39,8 +39,8 @@ export const Navigation = ({ menuData, isMenuOpen, setIsMenuOpen, contactData })
       >
         <div className={styles.header}>
           <Link href="/">
-            <h1>Running.GoInvo</h1>
-            <h2>Playbook 3.0</h2>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/goinvo-running-logo.svg" alt="Running GoInvo Logo" width={216} />
           </Link>
         </div>
         <div className={styles.menuContent}>

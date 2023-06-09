@@ -45,6 +45,11 @@
   }
 }
 
+.header {
+  margin-bottom: 105px;
+  text-align: center;
+}
+
 .menuContent {
   a {
     display: block;
@@ -94,12 +99,12 @@
   position: absolute;
   bottom: 30px;
   padding-left: 6px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #E6E9F4 !important;
   font-size: 0.9em;
   width: calc(100% - 80px);
 
   a {
-    color: white !important;
+    color: #E6E9F4 !important;
     text-decoration: underline;
   }
 }

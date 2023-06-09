@@ -1,17 +1,10 @@
 .googleParser {
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.4em;
 
   a {
     color: var(--theme-main);
   }
-}
-
-.title {
-  font-size: 2.4rem;
-  line-height: 1.4em;
-  font-weight: 900;
-  margin-bottom: 20px;
 }
 
 .heading1 {
@@ -21,20 +14,28 @@
   margin: 0 0 5px;
 }
 
-.heading2 {
-  font-size: 1.4rem;
+.title, .heading2 {
+  font-size: 1.9rem;
   line-height: 1.4em;
+  color: #30333D;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 .heading3 {
-  font-size: 1.2rem;
+  font-size: 0.89rem;
   line-height: 1.4em;
+  letter-spacing: 1.5px;
   margin-top: 0;
   color: var(--gray4);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .horizontalLine {
-  border: 1px solid var(--theme-accent);
+  border: 1px solid #d3d3d3;
   opacity: 0.4;
   margin: 25px 0;
   width: 100%;
