@@ -14,7 +14,7 @@ export const getFileList = async (allFiles) => {
   await client.authorize();
 
   // fetch the entire folder
-  const folderId = "11N3RY-5t73GvWfvXa-qFAvww8vIw1AOG";
+  const folderId = "1psiHxrFMG7esLaCk12Zub_1o8QMxBpMZ";
   const gsapi2 = google.drive({ version: "v3", auth: client });
   const opt2 = {
     q: `'${folderId}' in parents and trashed = false`,
